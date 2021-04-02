@@ -36,3 +36,11 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(unit), unit.name)
+
+    def test_qty_str(self):
+        """Test the quantity string representation"""
+        qty = models.Quantity.objects.create(
+            amount=1.00
+        )
+
+        self.assertEqual(str(qty), str(qty.amount))

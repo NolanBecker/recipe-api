@@ -25,6 +25,14 @@ class Unit(models.Model):
         return self.name
 
 
+class Quantity(models.Model):
+    """Qty used in a recipe"""
+    amount = models.DecimalField(max_digits=5, decimal_places=2, unique=True)
+
+    def __str__(self):
+        return str(self.amount)
+
+
 class Recipe(models.Model):
     """Recipe"""
     name = models.CharField(max_length=255, unique=True)
