@@ -28,3 +28,11 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(recipe), recipe.name)
+
+    def test_unit_str(self):
+        """Test the unit string representation"""
+        unit = models.Unit.objects.create(
+            name='oz'
+        )
+
+        self.assertEqual(str(unit), unit.name)

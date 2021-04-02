@@ -1,6 +1,6 @@
 from rest_framework import viewsets, mixins
 
-from core.models import Tag, Ingredient, Recipe
+from core.models import Tag, Ingredient, Recipe, Unit
 from recipe import serializers
 
 
@@ -18,6 +18,13 @@ class IngredientViewSet(viewsets.GenericViewSet,
     """Manage ingredients in the database"""
     queryset = Ingredient.objects.all().order_by('name')
     serializer_class = serializers.IngredientSerializer
+
+
+class UnitViewSet(viewsets.GenericViewSet,
+                  mixins.ListModelMixin):
+    """Manage units in the database"""
+    queryset = Unit.objects.all().order_by('name')
+    serializer_class = serializers.UnitSerializer
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
