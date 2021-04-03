@@ -27,6 +27,10 @@ class Unit(models.Model):
 
 class Quantity(models.Model):
     """Qty used in a recipe"""
+
+    class Meta:
+        verbose_name_plural = 'Quantities'
+
     amount = models.DecimalField(max_digits=5, decimal_places=2, unique=True)
 
     def __str__(self):

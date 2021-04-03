@@ -9,7 +9,7 @@ router.register('tags', views.TagViewSet)
 router.register('ingredients', views.IngredientViewSet)
 router.register('recipes', views.RecipeViewSet)
 router.register('units', views.UnitViewSet)
-router.register('quantities', views.QuantityViewSet)
+router.register('qtys', views.QuantityViewSet)
 
 app_name = 'recipe'
 
