@@ -47,3 +47,14 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Ingredient(models.Model):
+    """Ingredient for use in a recipe"""
+    quantity = models.ForeignKey('Quantity', on_delete=models.CASCADE)
+    unit = models.ForeignKey('Unit', on_delete=models.CASCADE)
+    item = models.ForeignKey('Item', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return (str(self.quantity.amount) + self.unit.name
+                + " " + self.item.name)

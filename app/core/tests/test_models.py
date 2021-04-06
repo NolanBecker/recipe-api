@@ -44,3 +44,16 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(str(qty), str(qty.amount))
+
+    def test_ingredient_str(self):
+        """Test the ingredient string representation"""
+        ingredient = models.Ingredient.objects.create(
+            quantity=models.Quantity.objects.create(amount=1.00),
+            unit=models.Unit.objects.create(name='oz'),
+            item=models.Item.objects.create(name='Lime Juice')
+        )
+
+        ingredientStr = (str(ingredient.quantity.amount)
+                         + ingredient.unit.name
+                         + " " + ingredient.item.name)
+        self.assertEqual(str(ingredient), ingredientStr)
