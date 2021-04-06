@@ -9,14 +9,6 @@ class Tag(models.Model):
         return self.name
 
 
-class Ingredient(models.Model):
-    """Ingredient used in a recipe"""
-    name = models.CharField(max_length=255, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
 class Item(models.Model):
     """Item used in an ingredient"""
     name = models.CharField(max_length=255, unique=True)
@@ -48,7 +40,7 @@ class Quantity(models.Model):
 class Recipe(models.Model):
     """Recipe"""
     name = models.CharField(max_length=255, unique=True)
-    ingredients = models.ManyToManyField('Ingredient')
+    items = models.ManyToManyField('Item')
     tags = models.ManyToManyField('Tag')
     directions = models.TextField(blank=True)
     link = models.CharField(max_length=255, blank=True)

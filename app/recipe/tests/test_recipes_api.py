@@ -4,7 +4,7 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from core.models import Recipe, Tag, Ingredient
+from core.models import Recipe, Tag, Item
 
 from recipe.serializers import RecipeSerializer, RecipeDetailSerializer
 
@@ -22,9 +22,9 @@ def sample_tag(name='Vodka'):
     return Tag.objects.create(name=name)
 
 
-def sample_ingredient(name='Lime Juice'):
+def sample_item(name='Lime Juice'):
     """Create and return a sample ingredient"""
-    return Ingredient.objects.create(name=name)
+    return Item.objects.create(name=name)
 
 
 def sample_recipe(**params):
@@ -61,7 +61,7 @@ class RecipeApiTests(TestCase):
         """Test viewing a recipe detail"""
         recipe = sample_recipe()
         recipe.tags.add(sample_tag())
-        recipe.ingredients.add(sample_ingredient())
+        recipe.items.add(sample_item())
 
         url = detail_url(recipe.id)
         res = self.client.get(url)
@@ -101,17 +101,17 @@ class RecipeApiTests(TestCase):
 
     def test_create_recipe_with_ingredients(self):
         """Test creating a recipe with ingredients"""
-        ingredient1 = sample_ingredient(name='Rum')
-        ingredient2 = sample_ingredient(name='Orange Juice')
+        item1 = sample_item(name='Rum')
+        item2 = sample_item(name='Orange Juice')
         payload = {
             'name': 'Painkiller',
-            'ingredients': [ingredient1.id, ingredient2.id]
+            'items': [item1.id, item2.id]
         }
         res = self.client.post(RECIPES_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         recipe = Recipe.objects.get(id=res.data['id'])
-        ingredients = recipe.ingredients.all()
-        self.assertEqual(ingredients.count(), 2)
-        self.assertIn(ingredient1, ingredients)
-        self.assertIn(ingredient2, ingredients)
+        items = recipe.items.all()
+        self.assertEqual(items.count(), 2)
+        self.assertIn(item1, items)
+        self.assertIn(item2, items)

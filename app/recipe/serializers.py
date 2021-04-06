@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.models import Tag, Ingredient, Recipe, Unit, Quantity, Item
+from core.models import Tag, Recipe, Unit, Quantity, Item
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -8,15 +8,6 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = ('id', 'name')
-        read_only_fields = ('id',)
-
-
-class IngredientSerializer(serializers.ModelSerializer):
-    """Serializer for ingredient objects"""
-
-    class Meta:
-        model = Ingredient
         fields = ('id', 'name')
         read_only_fields = ('id',)
 
@@ -50,9 +41,9 @@ class QuantitySerializer(serializers.ModelSerializer):
 
 class RecipeSerializer(serializers.ModelSerializer):
     """Serializer for recipe objects"""
-    ingredients = serializers.PrimaryKeyRelatedField(
+    items = serializers.PrimaryKeyRelatedField(
         many=True,
-        queryset=Ingredient.objects.all()
+        queryset=Item.objects.all()
     )
     tags = serializers.PrimaryKeyRelatedField(
         many=True,
@@ -61,16 +52,16 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recipe
-        fields = ('id', 'name', 'ingredients', 'tags', 'directions', 'link')
+        fields = ('id', 'name', 'items', 'tags', 'directions', 'link')
         read_only_fields = ('id',)
 
 
 class RecipeDetailSerializer(serializers.ModelSerializer):
     """Serialize a recipe detail"""
-    ingredients = IngredientSerializer(many=True, read_only=True)
+    items = ItemSerializer(many=True, read_only=True)
     tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Recipe
-        fields = ('id', 'name', 'ingredients', 'tags', 'directions', 'link')
+        fields = ('id', 'name', 'items', 'tags', 'directions', 'link')
         read_only_fields = ('id',)
