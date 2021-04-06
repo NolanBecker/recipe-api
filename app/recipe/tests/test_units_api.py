@@ -30,3 +30,21 @@ class UnitApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
+
+    def test_create_unit_successful(self):
+        """Test creating a unit"""
+        payload = {'name': 'Test unit'}
+        self.client.post(UNITS_URL, payload)
+
+        exists = Unit.objects.filter(
+            name=payload['name']
+        ).exists()
+
+        self.assertTrue(exists)
+
+    def test_create_unit_invalid(self):
+        """Test creating an invalid unit"""
+        payload = {'name': ''}
+        res = self.client.post(UNITS_URL, payload)
+
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)

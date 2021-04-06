@@ -21,14 +21,16 @@ class IngredientViewSet(viewsets.GenericViewSet,
 
 
 class UnitViewSet(viewsets.GenericViewSet,
-                  mixins.ListModelMixin):
+                  mixins.ListModelMixin,
+                  mixins.CreateModelMixin):
     """Manage units in the database"""
     queryset = Unit.objects.all().order_by('name')
     serializer_class = serializers.UnitSerializer
 
 
 class QuantityViewSet(viewsets.GenericViewSet,
-                      mixins.ListModelMixin):
+                      mixins.ListModelMixin,
+                      mixins.CreateModelMixin):
     """Manage qtys in the database"""
     queryset = Quantity.objects.all()
     serializer_class = serializers.QuantitySerializer
