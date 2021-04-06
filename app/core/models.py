@@ -17,6 +17,14 @@ class Ingredient(models.Model):
         return self.name
 
 
+class Item(models.Model):
+    """Item used in an ingredient"""
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Unit(models.Model):
     """Unit used in a recipe"""
     name = models.CharField(max_length=255, unique=True)

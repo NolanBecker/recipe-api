@@ -13,13 +13,13 @@ class ModelTests(TestCase):
 
         self.assertEqual(str(tag), tag.name)
 
-    def test_ingredient_str(self):
-        """Test the ingredient string representation"""
-        ingredient = models.Ingredient.objects.create(
+    def test_item_str(self):
+        """Test the item string representation"""
+        item = models.Item.objects.create(
             name='Whiskey'
         )
 
-        self.assertEqual(str(ingredient), ingredient.name)
+        self.assertEqual(str(item), item.name)
 
     def test_recipe_str(self):
         """Test the recipe string representation"""
