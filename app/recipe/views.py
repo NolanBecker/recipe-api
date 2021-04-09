@@ -1,6 +1,6 @@
 from rest_framework import viewsets, mixins
 
-from core.models import Tag, Recipe, Unit, Quantity, Item
+from core.models import Tag, Recipe, Unit, Quantity, Item, Ingredient
 from recipe import serializers
 
 
@@ -47,3 +47,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
             return serializers.RecipeDetailSerializer
 
         return self.serializer_class
+
+
+class IngredientViewSet(viewsets.ModelViewSet):
+    """Manage ingredients in the database"""
+    queryset = Ingredient.objects.all()
+    serializer_class = serializers.IngredientSerializer

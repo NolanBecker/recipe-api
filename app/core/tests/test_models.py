@@ -50,10 +50,10 @@ class ModelTests(TestCase):
         ingredient = models.Ingredient.objects.create(
             quantity=models.Quantity.objects.create(amount=1.00),
             unit=models.Unit.objects.create(name='oz'),
-            item=models.Item.objects.create(name='Lime Juice')
+            item=models.Item.objects.create(name='Whiskey')
         )
 
-        ingredientStr = (str(ingredient.quantity.amount)
-                         + ingredient.unit.name
-                         + " " + ingredient.item.name)
+        ingredientStr = (str(ingredient.quantity.amount) + " "
+                         + ingredient.unit.name + " "
+                         + ingredient.item.name)
         self.assertEqual(str(ingredient), ingredientStr)

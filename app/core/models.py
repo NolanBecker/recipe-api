@@ -56,5 +56,5 @@ class Ingredient(models.Model):
     item = models.ForeignKey('Item', on_delete=models.CASCADE)
 
     def __str__(self):
-        return (str(self.quantity.amount) + self.unit.name
+        return (str(self.quantity.amount) + " " + self.unit.name
                 + " " + self.item.name)
